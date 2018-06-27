@@ -242,23 +242,24 @@ $(".indivButtons").on("click", function() {
         var results = response.data;
         // console.log("results=" + results);
         for (var i = 0; i < results.length; i++) {
-            // $("<p>").text("Rating: " + results[i].rating);
-            // var dispImage = $("<img>");
-            // dispImage.attr("src", results[i].images.fixed_height_still.url);
-            // dispImage.attr("data-still", results[i].images.fixed_height_still.url);
-            // dispImage.attr("data-animate", results[i].images.fixed_height.url);
-            // dispImage.attr("value", i);
-            // dispImage.attr("data-state", "still");
-            // dispImage.attr("class", "gif");
-            // dispImage.attr("alt", "GIF image not loading");
-            var dispImage = ( 
-                "<img src='" + results[i].images.fixed_height_still.url + "' " +
-                "data-still='" + results[i].images.fixed_height_still.url + "' " +
-                "data-animate='" + results[i].images.fixed_height.url + "' " +
-                "data-state='still' class='gif' alt='GIF image not loading'>" +
-                "< Rating: " + results[i].rating + "&nbsp &nbsp");
-            // $("#gif-display").append(p);
+                        var dispImage = $("<img>");
+            dispImage.attr("src", results[i].images.fixed_height_still.url);
+            dispImage.attr("data-still", results[i].images.fixed_height_still.url);
+            dispImage.attr("data-animate", results[i].images.fixed_height.url);
+            dispImage.attr("value", i);
+            dispImage.attr("data-state", "still");
+            dispImage.attr("class", "gif");
+            dispImage.attr("alt", "GIF image not loading");
+            // var dispImage = ( 
+            //     "<img src='" + results[i].images.fixed_height_still.url + "' " +
+            //     "data-still='" + results[i].images.fixed_height_still.url + "' " +
+            //     "data-animate='" + results[i].images.fixed_height.url + "' " +
+            //     "data-state='still' class='gif' alt='GIF image not loading'>" +
+            //     "< Rating: " + results[i].rating + "&nbsp &nbsp");
+            var p = $("<p>").text("Rating: " + results[i].rating);
+            
             $("#gif-display").append(dispImage);
+            $("#gif-display").append(p);
           }
     });
 });
@@ -326,23 +327,25 @@ $("#add-a-button").on("click", function(event) {
             // console.log(response);
             var results = response.data;
             console.log("results=" + results);
-            for (var i = 0; i < results.length; i++) {    
-                // console.log(results[i].data.rating);
-                // var dispImage = $("<img>");
-                // dispImage.attr("src", results[i].images.fixed_height_still.url);
-                // dispImage.attr("data-still", results[i].images.fixed_height_still.url);
-                // dispImage.attr("data-animate", results[i].images.fixed_height.url);
-                // dispImage.attr("value", i);
-                // dispImage.attr("data-state", "still");
-                // dispImage.attr("class", "gif");
-                // dispImage.attr("alt", "GIF image not loading");
-                var dispImage = ( 
-                    "<img src='" + results[i].images.fixed_height_still.url + "' " +
-                    "data-still='" + results[i].images.fixed_height_still.url + "' " +
-                    "data-animate='" + results[i].images.fixed_height.url + "' " +
-                    "data-state='still' class='gif' alt='GIF image not loading'>" +
-                    "< Rating: " + results[i].rating + "&nbsp &nbsp");
+            for (var i = 0; i < results.length; i++) {
+                var dispImage = $("<img>");
+                dispImage.attr("src", results[i].images.fixed_height_still.url);
+                dispImage.attr("data-still", results[i].images.fixed_height_still.url);
+                dispImage.attr("data-animate", results[i].images.fixed_height.url);
+                dispImage.attr("value", i);
+                dispImage.attr("data-state", "still");
+                dispImage.attr("class", "gif");
+                dispImage.attr("alt", "GIF image not loading");
+                // var dispImage = ( 
+                //     "<img src='" + results[i].images.fixed_height_still.url + "' " +
+                //     "data-still='" + results[i].images.fixed_height_still.url + "' " +
+                //     "data-animate='" + results[i].images.fixed_height.url + "' " +
+                //     "data-state='still' class='gif' alt='GIF image not loading'>" +
+                //     "< Rating: " + results[i].rating + "&nbsp &nbsp");
+                var p = $("<p>").text("Rating: " + results[i].rating);
+                
                 $("#gif-display").append(dispImage);
+                $("#gif-display").append(p);
               }
         });
     });
