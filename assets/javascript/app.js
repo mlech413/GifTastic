@@ -1,3 +1,4 @@
+//--buttons already populated on screen
 var topics = [
     "Australia",
     "Canada",
@@ -13,6 +14,7 @@ var topics = [
     "United States of America"
     ]
 
+//--list of all other possible countries that user can add, used in validation later    
 countries = [
 "Afghanistan",
 "Albania",
@@ -213,9 +215,8 @@ countries = [
 "Zambia",
 "Zimbabwe"
 ]
- 
-selected = [];
 
+//--populate country buttons from topics array
 for (b=0; b<topics.length; b++) {
     $("#mainButtons").append("<button class='indivButtons' button-data='" + topics[b].toUpperCase() + "'>" + topics[b].toUpperCase() + "</button>");
 };
@@ -223,12 +224,11 @@ for (b=0; b<topics.length; b++) {
 // Click event for the buttons
 $(".indivButtons").on("click", function() {
 
+    //--clear out the gif display div
     $("#gif-display").html("<div></div>");
     
     var buttonSelected = $(this).attr("button-data");
     console.log("buttonSelected=" + buttonSelected);
-
-    // Build queryURL for giphy request
     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + buttonSelected + "&api_key=GqsPjeegNyqSdMkrzVwxW5DEBM3SlzkC&limit=10";
   
     // AJAX request for the queryURL
@@ -242,59 +242,28 @@ $(".indivButtons").on("click", function() {
         var results = response.data;
         // console.log("results=" + results);
         for (var i = 0; i < results.length; i++) {
-
-            var dispImage = $("<img>");
-            dispImage.attr("src", results[i].images.fixed_height_still.url);
-            dispImage.attr("data-still", results[i].images.fixed_height_still.url);
-            dispImage.attr("data-animate", results[i].images.fixed_height.url);
-            dispImage.attr("value", i);
-            dispImage.attr("data-state", "still");
-            dispImage.attr("class", "gif");
-            dispImage.attr("alt", "GIF image not loading");
+            // $("<p>").text("Rating: " + results[i].rating);
+            // var dispImage = $("<img>");
+            // dispImage.attr("src", results[i].images.fixed_height_still.url);
+            // dispImage.attr("data-still", results[i].images.fixed_height_still.url);
+            // dispImage.attr("data-animate", results[i].images.fixed_height.url);
+            // dispImage.attr("value", i);
+            // dispImage.attr("data-state", "still");
+            // dispImage.attr("class", "gif");
+            // dispImage.attr("alt", "GIF image not loading");
+            var dispImage = ( 
+                "<img src='" + results[i].images.fixed_height_still.url + "' " +
+                "data-still='" + results[i].images.fixed_height_still.url + "' " +
+                "data-animate='" + results[i].images.fixed_height.url + "' " +
+                "data-state='still' class='gif' alt='GIF image not loading'>" +
+                "< Rating: " + results[i].rating + "&nbsp &nbsp");
+            // $("#gif-display").append(p);
             $("#gif-display").append(dispImage);
           }
     });
 });
 
-
-function getData() {
-    
-    $("#gif-display").html("<div></div>");
-        
-    var buttonSelected = $(this).attr("button-data");
-    console.log("buttonSelected=" + buttonSelected);
-
-    // Build queryURL for giphy request
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + buttonSelected + "&api_key=GqsPjeegNyqSdMkrzVwxW5DEBM3SlzkC&limit=10";
-
-    // AJAX request for the queryURL
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
-    .then(function(response) {
-        // console.log(queryURL);
-        // console.log(response);
-        var results = response.data;
-        // console.log("results=" + results);
-        for (var i = 0; i < results.length; i++) {
-
-            var dispImage = $("<img>");
-            dispImage.attr("src", results[i].images.fixed_height_still.url);
-            dispImage.attr("data-still", results[i].images.fixed_height_still.url);
-            dispImage.attr("data-animate", results[i].images.fixed_height.url);
-            dispImage.attr("value", i);
-            dispImage.attr("data-state", "still");
-            dispImage.attr("class", "gif");
-            dispImage.attr("alt", "GIF image not loading");
-            $("#gif-display").append(dispImage);
-        }
-    });
-};
-
-
-
-
+//--text box to add a new country button
 $("#add-a-button").on("click", function(event) {
 
     event.preventDefault();
@@ -302,31 +271,49 @@ $("#add-a-button").on("click", function(event) {
     var newButton = $("#text-input").val().trim();
     newButton = newButton.toUpperCase();
     console.log("newButton=" + newButton);
+    
     var validSelection = false;
-    for ( i=0; i < countries.length; i++) {
-        
+    var alreadyUsed = false;
+
+    //--check to make sure the country entered is a valid country
+    for ( i=0; i < countries.length; i++) {        
         if (newButton == countries[i].toUpperCase()) {
             validSelection = true;
         }
     } 
+    //--check if that country button is already on the screen
+    for ( i=0; i < topics.length; i++) {
+        if (newButton == topics[i].toUpperCase()) {
+            alreadyUsed = true;
+        }
+    }
+    //--if the added country is valid, and hasn't already been added, add the button to the screen
+    if (validSelection && !alreadyUsed) {
+        topics[i] = newButton;
+    }
 
-    if (validSelection) {
+    //--alert if that button alreafy exists
+    if (alreadyUsed) {
+        alert("That country already has a button created.");
+    }
+    //--create a new button
+    else if (validSelection) {
     $("#mainButtons").append("<button class='indivButtons' button-data='" + newButton + "'>" + newButton + "</button>");
     console.log("<button class='indivButtons' button-data='" + newButton + "'>" + newButton + "</button>");
     }
+    //--alert if typed an invalid country
     else {
-        alert("Please enter a valid country");
+        alert("Please enter a valid country.");
     };
 
     // Click event for the buttons
     $(".indivButtons").on("click", function() {
 
+        //--clear out the gif display div
         $("#gif-display").html("<div></div>");
-        
+
         var buttonSelected = $(this).attr("button-data");
         console.log("buttonSelected=" + buttonSelected);
-
-        // Build queryURL for giphy request
         var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + "Funny " + buttonSelected + "&api_key=GqsPjeegNyqSdMkrzVwxW5DEBM3SlzkC&limit=10";
 
         // AJAX request for the queryURL
@@ -340,24 +327,30 @@ $("#add-a-button").on("click", function(event) {
             var results = response.data;
             console.log("results=" + results);
             for (var i = 0; i < results.length; i++) {    
-                var dispImage = $("<img>");
-                dispImage.attr("src", results[i].images.fixed_height_still.url);
-                dispImage.attr("data-still", results[i].images.fixed_height_still.url);
-                dispImage.attr("data-animate", results[i].images.fixed_height.url);
-                dispImage.attr("value", i);
-                dispImage.attr("data-state", "still");
-                dispImage.attr("class", "gif");
-                dispImage.attr("alt", "GIF image not loading");
+                // console.log(results[i].data.rating);
+                // var dispImage = $("<img>");
+                // dispImage.attr("src", results[i].images.fixed_height_still.url);
+                // dispImage.attr("data-still", results[i].images.fixed_height_still.url);
+                // dispImage.attr("data-animate", results[i].images.fixed_height.url);
+                // dispImage.attr("value", i);
+                // dispImage.attr("data-state", "still");
+                // dispImage.attr("class", "gif");
+                // dispImage.attr("alt", "GIF image not loading");
+                var dispImage = ( 
+                    "<img src='" + results[i].images.fixed_height_still.url + "' " +
+                    "data-still='" + results[i].images.fixed_height_still.url + "' " +
+                    "data-animate='" + results[i].images.fixed_height.url + "' " +
+                    "data-state='still' class='gif' alt='GIF image not loading'>" +
+                    "< Rating: " + results[i].rating + "&nbsp &nbsp");
                 $("#gif-display").append(dispImage);
               }
         });
     });
 });
 
+//--start gif as still image, then animate if it is clicked
 $(document).on("click", ".gif", function() {   
     var state = $(this).attr("data-state");
-    // console.log("state=" + state);
-    // console.log("$(this).attr('src')=" + $(this).attr('src'));
     if (state === "still") {
         $(this).attr("src", $(this).attr("data-animate"));
         $(this).attr("data-state", "animate");
