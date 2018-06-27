@@ -229,7 +229,7 @@ $(".indivButtons").on("click", function() {
     
     var buttonSelected = $(this).attr("button-data");
     console.log("buttonSelected=" + buttonSelected);
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + buttonSelected + "&api_key=GqsPjeegNyqSdMkrzVwxW5DEBM3SlzkC&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + buttonSelected + "&api_key=GqsPjeegNyqSdMkrzVwxW5DEBM3SlzkC&limit=10";
   
     // AJAX request for the queryURL
     $.ajax({
@@ -271,7 +271,7 @@ $("#add-a-button").on("click", function(event) {
     var newButton = $("#text-input").val().trim();
     newButton = newButton.toUpperCase();
     console.log("newButton=" + newButton);
-    
+
     var validSelection = false;
     var alreadyUsed = false;
 
@@ -314,7 +314,7 @@ $("#add-a-button").on("click", function(event) {
 
         var buttonSelected = $(this).attr("button-data");
         console.log("buttonSelected=" + buttonSelected);
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + "Funny " + buttonSelected + "&api_key=GqsPjeegNyqSdMkrzVwxW5DEBM3SlzkC&limit=10";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + "Funny " + buttonSelected + "&api_key=GqsPjeegNyqSdMkrzVwxW5DEBM3SlzkC&limit=10";
 
         // AJAX request for the queryURL
         $.ajax({
