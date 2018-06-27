@@ -2,7 +2,7 @@
 
 ## Around the World!
 
-### HInteresting videos from various countries...
+### Interesting videos from various countries...
 
 ### Click one of those listed, or enter a new country!
 
