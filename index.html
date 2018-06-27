@@ -4,9 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <!-- CSS style reset -->
+        <link rel="stylesheet" href="assets/css/reset.css">
+        <!-- link to the jQuery Library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- link to Bootstrap-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <!-- CSS style sheet -->
+        <link rel="stylesheet" href="assets/css/style.css">
     <title>GifTastic</title>
 </head>
 <body>
-    
+        <video autoplay muted loop id="bgVideo">
+                <source src="assets/images/earth.mp4" type="video/mp4">
+        </video>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Around the World!</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Interesting videos from various countries...</h3>
+                <h3>Click one of those listed, or enter a new country!</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div id="mainButtons">
+                     <!-- list of buttons -->
+                </div>
+            </div>
+            <div class="col-md-4">
+                    <form id="input-form">
+                        <!-- <label for="main-input">Enter here</label> -->
+                        <input type="text" id="text-input">
+                        <input id="add-a-button" type="submit" value="Add One!">
+                        </form>
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="gif-display">
+                    <!-- display gifs here -->
+                </div>
+            </div>
+    </div>  
+
+    <!-- JavaScript code -->
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+
 </body>
 </html>

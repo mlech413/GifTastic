@@ -1,0 +1,41 @@
+body {
+    text-align: center;
+    color: #ffffff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* video loop for the background */
+#bgVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+}
+
+h1 {
+    margin: 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.indivButtons {
+    padding: 5px;
+    margin: 10px;
+}
+
+img {
+    margin: 10px;
+}
+
+#input-form {
+    margin: 15px 0 10px 0;
+}
+
+#find-input {
+    font-size: 75%;
+}
+
+
+
+
+
